@@ -1,4 +1,5 @@
 import React,{useEffect,useState} from 'react';
+import {createPortal} from 'react-dom';
 import {LogIn,LogOut,ShieldCheck,UserRound,UserRoundPlus,X} from 'lucide-react';
 
 type LocalAccountRecord={name:string;email:string;salt:string;hash:string};
@@ -34,7 +35,7 @@ export function LocalAccount(){
  function signOut(){localStorage.removeItem(SESSION_KEY);setActive(false);setPassword('');setRegister(false);}
  return <>
   <button className="user-circle local-account-button" title={active?`${record?.name} · Minha conta local`:'Criar ou acessar conta local'} aria-label="Minha conta local" onClick={()=>setOpen(true)}>{active&&record?initial(record.name):<UserRound size={16}/>}</button>
-  {open&&<div className={`local-account-backdrop ${required&&!active?'account-required':''}`} role="presentation" onMouseDown={event=>{if(event.target===event.currentTarget)close();}}><section className="local-account-card" role="dialog" aria-modal="true" aria-labelledby="local-account-title">
+  {open&&createPortal(<div className={`local-account-backdrop ${required&&!active?'account-required':''}`} role="presentation" onMouseDown={event=>{if(event.target===event.currentTarget)close();}}><section className="local-account-card" role="dialog" aria-modal="true" aria-labelledby="local-account-title">
    {(!required||active)&&<button className="local-account-dismiss" aria-label="Fechar" onClick={()=>close()}><X size={18}/></button>}
    <span className="local-account-mark"><ShieldCheck size={21}/></span>
     {active&&record?<><span className="eyebrow">CONTA NESTE NAVEGADOR</span><h2 id="local-account-title">Olá, {record.name.split(' ')[0]}.</h2><p>{record.email}</p><div className="local-account-local-note">Seu perfil e sua senha ficam salvos somente neste navegador. Os dados do workspace não são enviados nem sincronizados.</div><button className="local-account-submit" onClick={signOut}><LogOut size={15}/>Sair desta conta</button></>:guide?<><span className="eyebrow">BEM-VINDO AO NEXO OFFICE</span><h2 id="local-account-title">Entre para acessar o escritório</h2><p>Na primeira visita, crie sua conta e faça login. O acesso à equipe e ao workspace só fica disponível depois de entrar.</p><ol className="local-account-guide"><li><span>01</span><div><strong>Crie sua conta</strong><small>Cadastre nome, e-mail e senha neste navegador.</small></div></li><li><span>02</span><div><strong>Entre no Nexo Office</strong><small>Use o e-mail e a senha cadastrados para abrir o escritório.</small></div></li></ol><button className="local-account-submit" onClick={()=>{try{localStorage.setItem(GUIDE_KEY,'true');}catch{}setGuide(false);setRegister(true);setSuccess('');}}>Criar conta e continuar</button><div className="local-account-local-note">Sua conta é local a este navegador. Ela não é sincronizada entre dispositivos.</div></>:<><span className="eyebrow">PERFIL LOCAL</span><h2 id="local-account-title">{register?'Criar sua conta':'Acessar conta local'}</h2><p>{register?'Cadastre seu perfil para identificar o workspace neste dispositivo.':'Entre com a conta cadastrada neste navegador.'}</p>
@@ -53,6 +54,6 @@ export function LocalAccount(){
     </form>
     <div className="local-account-local-note">Este cadastro é local: não valida sua identidade online, não recupera senha e não sincroniza entre dispositivos.</div>
    </>}
-  </section></div>}
+  </section></div>,document.body)}
  </>;
 }

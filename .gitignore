@@ -1,0 +1,9 @@
+node_modules/
+dist/
+dist-agent-lab/
+.env*
+!.env.example
+*.log
+
+.nexo-runtime/
+local-workspaces/

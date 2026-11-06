@@ -1,0 +1,29 @@
+{
+  "name": "nexo-office",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "start": "tsx server.mts",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "dev:agents": "vite --config vite.agent-lab.config.ts",
+    "build:agents": "tsc --noEmit && vite build --config vite.agent-lab.config.ts"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "three": "^0.180.0",
+    "lucide-react": "^0.468.0"
+  },
+  "devDependencies": {
+    "vite": "^7.1.0",
+    "typescript": "^5.9.0",
+    "tsx": "^4.20.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@types/three": "^0.180.0"
+  }
+}

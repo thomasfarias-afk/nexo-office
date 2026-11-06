@@ -1,0 +1,21 @@
+/* Vector companions keep their silhouettes legible from the chat to tiny badges. */
+.mascot-svg{display:inline-flex;align-items:center;justify-content:center;width:100%;height:100%;pointer-events:none}
+.mascot-svg>svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 3px 3px #0e1c2425)}
+.avatar.mascot-avatar{overflow:visible;background:radial-gradient(ellipse at 35% 25%,color-mix(in srgb,var(--avatar-color) 28%,#34403a),#1d2a29);border-color:color-mix(in srgb,var(--avatar-color) 32%,transparent);box-shadow:inset 0 1px 0 #f2ffec12,0 4px 14px #0002}
+.mascot-avatar>.mascot-svg{width:112%;height:112%;position:absolute;left:-6%;bottom:-3%}
+.avatar.mascot-avatar.small>.mascot-svg{width:120%;height:120%;left:-10%;bottom:-3%}
+.agent-popover>.mascot-avatar{width:88px;height:88px;border-radius:23px;margin-top:9px}
+.chat-welcome .mascot-avatar{width:100px;height:100px;border-radius:28px}
+.mascot-picker{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:6px 0 0}
+.mascot-picker>button{display:flex;flex-direction:column;gap:5px;border-radius:13px;padding:8px 3px 9px;background:#101d1d70;border:1px solid #c9ddbc17;position:relative;min-width:0;color:#91a58a;transition:transform .2s,background .2s,border-color .2s}
+.mascot-picker>button .mascot-svg{height:75px;width:75px;max-width:100%;transition:transform .2s}
+.mascot-picker>button small{font-size:9px;font-weight:500}
+.mascot-picker>button:hover .mascot-svg{transform:translateY(-4px) rotate(-4deg)}
+.mascot-picker>button.selected{border-color:#d6edac9c;background:#d6edac0e;color:#d6edac;box-shadow:inset 0 0 0 1px #d6edac15}
+.mascot-picker>button.selected:after{content:'';position:absolute;right:6px;top:6px;width:4px;height:4px;border-radius:50%;background:#d6edac;box-shadow:0 0 8px #d6edac66}
+.edit-form>.mascot-download{color:#a5b8a5;margin:0 0 25px;font-size:10px}
+.agent-label>svg{height:31px;width:30px;flex-shrink:0;margin:-10px -1px -6px -5px;filter:drop-shadow(0 2px 2px #0003)}
+.agent-label{background:linear-gradient(135deg,#344438ed,#1b2b26ed);border-color:#d5e9bd35;box-shadow:0 5px 0 -3px #101c17,0 8px 18px #0003;transition:background .2s,border-color .2s}
+.agent-label.hovered{border-color:#d6edac88;box-shadow:0 5px 0 -3px #101c17,0 0 24px #cde9ab12,0 8px 18px #0003}
+@media(max-width:650px){.mascot-picker{gap:5px}.mascot-picker>button{padding:6px 2px 8px;border-radius:10px}.mascot-picker>button .mascot-svg{height:55px}.mascot-picker>button small{font-size:8px}.agent-popover>.mascot-avatar{width:67px;height:67px;margin-top:3px}.agent-label>svg{width:24px;height:26px;margin:-8px -2px -6px -5px}}
+@media(prefers-reduced-motion:reduce){.mascot-picker>button:hover .mascot-svg{transform:none}}

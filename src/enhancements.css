@@ -1,0 +1,23 @@
+.office-loading{position:fixed;left:60%;top:48%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:11px;z-index:3;pointer-events:none;font-size:12px;color:#a5c7d5;padding:16px 20px;border-radius:14px;border:1px solid #b6e0e61c;background:#102c37b3;backdrop-filter:blur(16px)}
+.workspace-search-button{gap:10px;border-radius:11px;padding:9px 12px;font-size:11px;color:#9dbfce;background:#091f2980;border-color:#b9dfe422;box-shadow:inset 0 2px 7px #0001}
+.workspace-search-button kbd{font:9px 'DM Sans',sans-serif;border:1px solid #b7dce52b;border-bottom-width:2px;border-radius:5px;padding:2px 4px;color:#80a7b8;margin-left:18px}
+.workspace-search-button:hover{color:#d2eff4;background:#a6dce90c}
+.task-toolbar{flex-wrap:wrap}.task-toolbar .search{min-width:200px}.task-toolbar select{width:auto;max-width:195px;font-size:11px;min-width:140px}
+.overdue-badge{display:inline-block;vertical-align:middle;margin-left:7px;border:1px solid #f0a2852b;background:#d2856b12;color:#efb29b;font-size:8px;padding:3px 6px;border-radius:6px}
+.filter-empty{text-align:center;padding-bottom:25px}.filter-empty .empty{padding-bottom:24px}.filter-empty>button{font-size:11px;padding:10px 16px;border-radius:11px;color:#b9e8eb}
+.copy-response{margin-top:10px;font-size:9px;border:0;color:#81abba;padding:5px 7px;background:#96cdd807;border-radius:7px}.copy-response:hover{color:#c4e8ed;background:#96cdd815}
+.search-layer{z-index:35;align-items:start;padding:clamp(95px,15vh,160px) 20px 25px;background:#05131cc7;backdrop-filter:blur(8px)}
+.quick-search{width:min(600px,100%);max-height:70vh;display:flex;flex-direction:column;border-radius:22px;overflow:hidden;animation:enter .18s ease}
+.quick-search-input{display:flex;align-items:center;padding:18px 20px;gap:13px;border-bottom:1px solid #b2dee522;color:#a0d4df;flex-shrink:0}
+.quick-search-input input{padding:5px 0;border:0;background:none;box-shadow:none;outline:none;font-size:14px;min-width:0;flex:1}.quick-search-input input:focus-visible{outline:none}
+.quick-search-heading{font-size:9px;letter-spacing:1.8px;color:#719bac;padding:20px 22px 11px;flex-shrink:0}
+.quick-search-results{overflow-y:auto;min-height:0;padding:0 10px 12px;scrollbar-width:thin;scrollbar-color:#446e7e transparent}
+.quick-search-results>button{display:flex;width:100%;justify-content:flex-start;text-align:left;border:1px solid transparent;border-radius:12px;padding:12px;gap:13px;background:transparent}
+.quick-search-results>button[aria-selected=true]{background:linear-gradient(120deg,#719fa222,#7cb1bd0d);border-color:#addfe722;box-shadow:inset 0 1px 0 #ffffff08}
+.quick-result-icon{width:36px;height:36px;display:grid;place-items:center;flex-shrink:0;border-radius:11px;border:1px solid #9ecdd322;color:#abd8e1;background:#7ec1c815}.quick-result-icon.task{color:#dfcaa8;background:#c8a87712;border-color:#decaa31c}
+.quick-search-results strong{display:block;font-size:12px;font-weight:550;color:#daedf3;line-height:1.5;overflow-wrap:anywhere}.quick-search-results small{display:block;font-size:10px;color:#8fb2c1;margin-top:3px;line-height:1.5}.quick-search-results>button>svg{margin-left:auto;flex-shrink:0;color:#719bac}
+.quick-search footer{display:flex;gap:20px;padding:13px 23px;background:#0a202a70;border-top:1px solid #b2dee518;font-size:10px;color:#749cab;flex-shrink:0}
+.quick-search-empty{padding:30px 15px 35px;text-align:center;font-size:12px;color:#96b6c5}
+.modal>.eyebrow{margin-bottom:10px}.modal>.muted{margin-top:-9px;margin-bottom:22px;font-size:12px}.modal .edit-form>.edit-form{margin:0}
+@media(max-width:1250px){.workspace-search-button>span{display:none}.workspace-search-button kbd{margin-left:0}.workspace-search-button{gap:7px;padding:8px 10px}}
+@media(max-width:650px){.workspace-search-button{padding:6px;border:0;background:none}.workspace-search-button kbd{display:none}.header-right{gap:7px}.task-toolbar select{flex:1;min-width:115px;max-width:none;font-size:10px}.task-toolbar .search{min-width:100%}.quick-search-input{padding:16px;gap:10px}.quick-search-input input{font-size:12px}.search-layer{padding:82px 10px 16px}.quick-search{max-height:calc(100dvh - 110px);border-radius:18px}.quick-search footer{font-size:9px;gap:16px}.overdue-badge{font-size:8px}}

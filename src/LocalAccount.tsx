@@ -16,24 +16,25 @@ function initial(name:string){return name.trim().split(/\s+/).slice(0,2).map(par
 
 export function LocalAccount(){
  const [record,setRecord]=useState<LocalAccountRecord|null>(null),[active,setActive]=useState(false),[open,setOpen]=useState(false),[register,setRegister]=useState(true);
+ const [required]=useState(()=>typeof window!=='undefined'&&!['localhost','127.0.0.1','::1'].includes(window.location.hostname));
  const [name,setName]=useState(''),[email,setEmail]=useState(''),[password,setPassword]=useState(''),[confirm,setConfirm]=useState(''),[error,setError]=useState(''),[busy,setBusy]=useState(false);
- useEffect(()=>{try{const saved=localStorage.getItem(ACCOUNT_KEY);if(saved){const parsed=JSON.parse(saved) as LocalAccountRecord;setRecord(parsed);setEmail(parsed.email);setName(parsed.name);setRegister(false);setActive(localStorage.getItem(SESSION_KEY)==='true');}}catch{setError('Não foi possível ler o cadastro local.');}},[]);
- const close=()=>{setOpen(false);setPassword('');setConfirm('');setError('');};
+ useEffect(()=>{try{const saved=localStorage.getItem(ACCOUNT_KEY);const signedIn=localStorage.getItem(SESSION_KEY)==='true';if(saved){const parsed=JSON.parse(saved) as LocalAccountRecord;setRecord(parsed);setEmail(parsed.email);setName(parsed.name);setRegister(false);setActive(signedIn);if(required&&!signedIn)setOpen(true);}else if(required){setRegister(true);setOpen(true);}}catch{setError('Não foi possível ler o cadastro local.');if(required)setOpen(true);}},[required]);
+ const close=(force=false)=>{if(required&&!active&&!force)return;setOpen(false);setPassword('');setConfirm('');setError('');};
  async function submit(event:React.FormEvent){event.preventDefault();setError('');
   if(register){if(name.trim().length<2){setError('Informe seu nome.');return;}if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){setError('Informe um e-mail válido.');return;}if(password.length<8){setError('Use uma senha com pelo menos 8 caracteres.');return;}if(password!==confirm){setError('As senhas não coincidem.');return;}}
   else if(!record){setError('Ainda não há uma conta neste navegador. Crie sua conta primeiro.');return;}
   else if(!password){setError('Informe sua senha.');return;}
   setBusy(true);
   try{
-   if(register){const salt=crypto.getRandomValues(new Uint8Array(16));const hash=await passwordHash(password,salt);const next={name:name.trim(),email:email.trim().toLowerCase(),salt:toBase64(salt),hash:toBase64(hash)};localStorage.setItem(ACCOUNT_KEY,JSON.stringify(next));localStorage.setItem(SESSION_KEY,'true');setRecord(next);setActive(true);close();}
-   else if(record){const candidate=await passwordHash(password,fromBase64(record.salt));const expected=fromBase64(record.hash);const match=candidate.length===expected.length&&candidate.every((value,index)=>value===expected[index]);if(!match){setError('E-mail ou senha incorretos.');return;}localStorage.setItem(SESSION_KEY,'true');setActive(true);close();}
+   if(register){const salt=crypto.getRandomValues(new Uint8Array(16));const hash=await passwordHash(password,salt);const next={name:name.trim(),email:email.trim().toLowerCase(),salt:toBase64(salt),hash:toBase64(hash)};localStorage.setItem(ACCOUNT_KEY,JSON.stringify(next));localStorage.setItem(SESSION_KEY,'true');setRecord(next);setActive(true);close(true);}
+   else if(record){const candidate=await passwordHash(password,fromBase64(record.salt));const expected=fromBase64(record.hash);const match=candidate.length===expected.length&&candidate.every((value,index)=>value===expected[index]);if(!match){setError('E-mail ou senha incorretos.');return;}localStorage.setItem(SESSION_KEY,'true');setActive(true);close(true);}
   }catch{setError('Não foi possível salvar o cadastro neste navegador.');}finally{setBusy(false);}
  }
  function signOut(){localStorage.removeItem(SESSION_KEY);setActive(false);setPassword('');setRegister(false);}
  return <>
   <button className="user-circle local-account-button" title={active?`${record?.name} · Minha conta local`:'Criar ou acessar conta local'} aria-label="Minha conta local" onClick={()=>setOpen(true)}>{active&&record?initial(record.name):<UserRound size={16}/>}</button>
-  {open&&<div className="local-account-backdrop" role="presentation" onMouseDown={event=>{if(event.target===event.currentTarget)close();}}><section className="local-account-card" role="dialog" aria-modal="true" aria-labelledby="local-account-title">
-   <button className="local-account-dismiss" aria-label="Fechar" onClick={close}><X size={18}/></button>
+  {open&&<div className={`local-account-backdrop ${required&&!active?'account-required':''}`} role="presentation" onMouseDown={event=>{if(event.target===event.currentTarget)close();}}><section className="local-account-card" role="dialog" aria-modal="true" aria-labelledby="local-account-title">
+   {(!required||active)&&<button className="local-account-dismiss" aria-label="Fechar" onClick={()=>close()}><X size={18}/></button>}
    <span className="local-account-mark"><ShieldCheck size={21}/></span>
    {active&&record?<><span className="eyebrow">CONTA NESTE NAVEGADOR</span><h2 id="local-account-title">Olá, {record.name.split(' ')[0]}.</h2><p>{record.email}</p><div className="local-account-local-note">Seu perfil e sua senha ficam salvos somente neste navegador. Os dados do workspace não são enviados nem sincronizados.</div><button className="local-account-submit" onClick={signOut}><LogOut size={15}/>Sair desta conta</button></>:<><span className="eyebrow">PERFIL LOCAL</span><h2 id="local-account-title">{register?'Criar sua conta':'Acessar conta local'}</h2><p>{register?'Cadastre seu perfil para identificar o workspace neste dispositivo.':'Entre com a conta cadastrada neste navegador.'}</p>
     <div className="local-account-tabs" role="tablist" aria-label="Acesso à conta">

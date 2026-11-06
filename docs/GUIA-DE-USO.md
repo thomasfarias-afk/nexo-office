@@ -2,9 +2,10 @@
 
 ## Criar a conta local
 
-1. Clique no ícone de perfil no canto superior direito.
+1. Na primeira visita, leia o pop-up inicial e escolha **Criar conta e continuar**.
 2. Informe nome, e-mail e uma senha de pelo menos 8 caracteres.
-3. Use o mesmo ícone para entrar ou sair depois.
+3. Depois do cadastro, entre com o e-mail e a senha para abrir o escritório.
+4. Use o ícone de perfil no canto superior direito para sair ou entrar novamente.
 
 O cadastro identifica você neste navegador. Não é uma conta online: não há confirmação por e-mail, recuperação de senha ou sincronização entre dispositivos. Se esquecer a senha, o cadastro local não pode ser recuperado. A senha é armazenada como hash derivado, mas os dados do workspace não são criptografados.
 

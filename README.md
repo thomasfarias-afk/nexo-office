@@ -39,7 +39,7 @@ Para usar uma API compatível em vez de um CLI, copie `.env.example` para `.env`
 
 ## Contas e armazenamento
 
-O perfil de conta é local ao navegador e ao dispositivo. O cadastro não é uma conta hospedada: não confirma a identidade por e-mail, não sincroniza dispositivos e não oferece recuperação de senha. O workspace e as conversas também ficam no armazenamento local do navegador. Faça exportações em **Configurações** para guardar cópias.
+Na primeira visita, um pop-up explica o cadastro e solicita que a pessoa crie uma conta e entre para acessar o escritório. Depois do cadastro, é necessário fazer login. O perfil de conta é local ao navegador e ao dispositivo: não confirma a identidade por e-mail, não sincroniza dispositivos e não oferece recuperação de senha. O workspace e as conversas também ficam no armazenamento local do navegador. Faça exportações em **Configurações** para guardar cópias.
 
 A senha do perfil local é derivada com PBKDF2 e salt antes de ser armazenada no navegador. Esse recurso ajuda a identificar o perfil neste dispositivo, mas não substitui autenticação de servidor nem criptografa os dados do workspace. Qualquer pessoa com acesso ao perfil do navegador ou aos arquivos locais pode acessar os dados.
 
